@@ -103,6 +103,28 @@
       color: var(--text-primary);
     }
     .intro-card p:last-child { margin-bottom: 0; }
+    .hero-image-card {
+      margin: 0 0 24px;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--surface-primary);
+      box-shadow: var(--shadow-soft);
+    }
+    .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1536 / 768;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-caption {
+      padding: 14px 18px 16px;
+      background: var(--surface-primary);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
     .sidebar {
       display: grid;
       gap: 18px;
@@ -203,6 +225,10 @@
   <main class="guide-card">
 <h1>Wolvesbane New Player Guide</h1>
 <div class="version-pill">Version 2</div>
+<section class="hero-image-card">
+<img class="hero-image" src="./assets/hero-wolvesbane.png" alt="Fantasy landscape showing a road leading toward a walled city, with ruins in the foreground and a dungeon entrance carved into rock on the right.">
+<div class="hero-caption">A calmer overview of the world: city, road, ruins, and dungeon. It fits the guide well because Wolvesbane progression is really about moving from safety into danger in the right order.</div>
+</section>
 <section class="intro-card">
 <p>If your goal on Wolvesbane is to reach hard bosses and real endgame farming, stop thinking in terms of broad “what is this shard about?” advice. The useful question is simpler: what should I do next?</p>
 <p>This version is written to answer that directly. It is not a lore page. It is a practical route for a new player who wants to stop being weak, start making money, and grow into pet-based boss farming as fast as possible.</p>
