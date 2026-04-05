@@ -6,51 +6,70 @@
   <title>Wolvesbane New Player Guide</title>
   <style>
     :root {
-      --bg: #f3ede3;
-      --paper: #fffdf8;
-      --ink: #201915;
-      --muted: #6e6055;
-      --accent: #7d4d26;
-      --rule: #d8cab8;
+      --surface-primary: #FFFFFF;
+      --surface-canvas: #F2F2F3;
+      --accent-primary: #6D6CF5;
+      --accent-secondary: #6EC8D6;
+      --surface-lilac: #E9E7FF;
+      --surface-mint: #E5F8F5;
+      --surface-cream: #FFF6E8;
+      --accent-coral: #FF8D92;
+      --accent-gold: #FFD68C;
+      --text-primary: #13151F;
+      --text-secondary: #74788E;
+      --line-soft: rgba(116, 120, 142, 0.18);
+      --shadow-soft: 0 20px 50px rgba(17, 21, 31, 0.08);
+      --radius-card: 22px;
+      --radius-soft: 18px;
+      --radius-blob: 999px;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 40px 20px;
-      background: linear-gradient(180deg, #e8dfd0 0%, var(--bg) 100%);
-      color: var(--ink);
-      font-family: Georgia, 'Times New Roman', serif;
-      line-height: 1.68;
+      padding: 28px 18px 56px;
+      background: var(--surface-canvas);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
     }
-    main {
-      max-width: 880px;
+    .page-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 24px;
+      max-width: 1240px;
       margin: 0 auto;
-      background: var(--paper);
-      border: 1px solid var(--rule);
-      border-radius: 18px;
-      padding: 56px 64px;
-      box-shadow: 0 20px 55px rgba(45, 31, 18, 0.12);
+      align-items: start;
+    }
+    .guide-card {
+      background: var(--surface-primary);
+      border-radius: var(--radius-card);
+      padding: 40px 44px;
+      box-shadow: var(--shadow-soft);
     }
     h1, h2 {
       line-height: 1.2;
       margin: 0;
     }
     h1 {
-      font-size: 2.4rem;
-      margin-bottom: 18px;
-      color: #241712;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: var(--text-primary);
     }
     h2 {
       font-size: 1.35rem;
-      margin-top: 34px;
+      margin-top: 38px;
       margin-bottom: 12px;
-      padding-top: 10px;
-      border-top: 1px solid var(--rule);
-      color: var(--accent);
+      padding-top: 16px;
+      border-top: 1px solid var(--line-soft);
+      color: var(--text-primary);
+      font-weight: 700;
     }
     p {
       margin: 12px 0;
-      font-size: 1.04rem;
+      font-size: 1rem;
     }
     ul, ol {
       margin: 10px 0 16px 24px;
@@ -59,23 +78,137 @@
     li { margin: 6px 0; }
     code {
       font-family: Consolas, 'Courier New', monospace;
-      background: #f1e9de;
+      background: var(--surface-lilac);
       padding: 1px 5px;
-      border-radius: 4px;
+      border-radius: 8px;
       font-size: 0.94em;
+    }
+    .version-pill {
+      width: fit-content;
+      margin: 0 auto 18px;
+      padding: 8px 14px;
+      border-radius: var(--radius-blob);
+      background: var(--surface-lilac);
+      color: var(--accent-primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .intro-card {
+      margin: 0 0 28px;
+      padding: 22px 24px;
+      border-radius: var(--radius-soft);
+      background: var(--surface-cream);
+      color: var(--text-primary);
+    }
+    .intro-card p:last-child { margin-bottom: 0; }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      display: grid;
+      gap: 18px;
+    }
+    .trend-card {
+      border-radius: var(--radius-card);
+      background: var(--surface-mint);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+    }
+    .trend-title {
+      margin: 0 0 14px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .chart-shell {
+      position: relative;
+      height: 176px;
+      margin-bottom: 14px;
+    }
+    .value-bubble {
+      position: absolute;
+      top: 36px;
+      left: 54%;
+      transform: translateX(-50%);
+      padding: 8px 14px;
+      border-radius: var(--radius-blob);
+      background: var(--surface-primary);
+      color: var(--text-primary);
+      box-shadow: 0 10px 22px rgba(19, 21, 31, 0.08);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .trend-card svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .range-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .range-active {
+      padding: 8px 14px;
+      border-radius: 22px;
+      background: var(--accent-secondary);
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .support-card {
+      border-radius: var(--radius-card);
+      background: var(--surface-primary);
+      padding: 20px 20px 18px;
+      box-shadow: var(--shadow-soft);
+    }
+    .support-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+    .support-card p,
+    .support-card li {
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+      line-height: 1.55;
+    }
+    .support-card ul {
+      margin: 10px 0 0 18px;
+    }
+    @media (max-width: 960px) {
+      .page-shell {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: static;
+      }
+      .guide-card {
+        padding: 28px 24px;
+      }
     }
     @media print {
       body { background: white; padding: 0; }
-      main { box-shadow: none; border: none; border-radius: 0; max-width: none; padding: 0; }
+      .page-shell { display: block; max-width: none; }
+      .guide-card, .support-card, .trend-card { box-shadow: none; }
+      .sidebar { display: none; }
+      .guide-card { border-radius: 0; padding: 0; }
     }
   </style>
 </head>
 <body>
-  <main>
+  <div class="page-shell">
+  <main class="guide-card">
 <h1>Wolvesbane New Player Guide</h1>
-<p>Version 2</p>
+<div class="version-pill">Version 2</div>
+<section class="intro-card">
 <p>If your goal on Wolvesbane is to reach hard bosses and real endgame farming, stop thinking in terms of broad “what is this shard about?” advice. The useful question is simpler: what should I do next?</p>
 <p>This version is written to answer that directly. It is not a lore page. It is a practical route for a new player who wants to stop being weak, start making money, and grow into pet-based boss farming as fast as possible.</p>
+</section>
 <h2>The Core Decision</h2>
 <p>If your destination is the hardest content, start on the pet path.</p>
 <p>You can play melee, mage, crafter, or some hybrid for fun. But if you want the cleanest road into serious farming, champs, and bosses, the strongest pattern from the Discord is still pets. Balrons, champion pressure, token farming, and high-end efficiency all keep pointing in the same direction.</p>
@@ -401,5 +534,45 @@
 <li>the cleanest non-donation route to the same early pet acceleration if you do not want to rely on WD purchases</li>
 </ul>
   </main>
+  <aside class="sidebar">
+    <section class="trend-card" aria-label="Progress trend card">
+      <p class="trend-title">Progress curve</p>
+      <div class="chart-shell">
+        <div class="value-bubble">First 1M</div>
+        <svg viewBox="0 0 280 170" role="img" aria-label="Progress trend">
+          <path d="M18 118 C42 118, 58 112, 76 104 S112 86, 126 96 S154 132, 170 118 S196 56, 212 54 S236 84, 248 78 S264 40, 272 36" fill="none" stroke="#FF8D92" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+          <circle cx="212" cy="54" r="12" fill="#FFFFFF"></circle>
+          <circle cx="212" cy="54" r="5" fill="#13151F"></circle>
+        </svg>
+      </div>
+      <div class="range-row">
+        <span>1D</span>
+        <span>1W</span>
+        <span>1M</span>
+        <span class="range-active">3M</span>
+        <span>1Y</span>
+        <span>ALL</span>
+      </div>
+    </section>
+    <section class="support-card">
+      <h3>Recommended Start</h3>
+      <ul>
+        <li><code>Animal Taming 120</code></li>
+        <li><code>Animal Lore 120</code></li>
+        <li>Flexible third skill</li>
+      </ul>
+      <p>Use the druid route for an <code>Instant Taming Deed</code>, then move quickly into a rainbow pet.</p>
+    </section>
+    <section class="support-card">
+      <h3>First Power Milestones</h3>
+      <ul>
+        <li>Water dungeon stable farm</li>
+        <li><code>4,000</code> tokens to <code>1,000,000</code> gold</li>
+        <li>First champ with manual boss tag</li>
+        <li>First safe balron loop</li>
+      </ul>
+    </section>
+  </aside>
+  </div>
 </body>
 </html>
