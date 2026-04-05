@@ -1,351 +1,299 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Wolvesbane New Player Guide</title>
   <style>
-    :root {
-      --bg: #f3ede3;
-      --paper: #fffdf8;
-      --ink: #201915;
-      --muted: #6e6055;
-      --accent: #7d4d26;
-      --rule: #d8cab8;
+    :root{
+      --bg1:#8dbde8;--bg2:#edf3f8;--glass:rgba(255,255,255,.72);--glass-2:rgba(255,255,255,.86);
+      --line:rgba(93,108,130,.14);--ink:#172033;--muted:#69758a;--accent:#7a4dff;--accent-2:#a872ff;
+      --shadow:0 28px 70px rgba(31,53,92,.16);--paper:#fff;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 40px 20px;
-      background: linear-gradient(180deg, #e8dfd0 0%, var(--bg) 100%);
-      color: var(--ink);
-      font-family: Georgia, 'Times New Roman', serif;
-      line-height: 1.68;
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{
+      margin:0;min-height:100vh;color:var(--ink);font:16px/1.65 "Segoe UI","Helvetica Neue",sans-serif;
+      background:
+        radial-gradient(circle at top right,rgba(255,255,255,.8),transparent 24%),
+        linear-gradient(180deg,var(--bg1) 0%,#c6dcef 30%,var(--bg2) 100%);
     }
-    main {
-      max-width: 880px;
-      margin: 0 auto;
-      background: var(--paper);
-      border: 1px solid var(--rule);
-      border-radius: 18px;
-      padding: 56px 64px;
-      box-shadow: 0 20px 55px rgba(45, 31, 18, 0.12);
+    body:before,body:after{
+      content:"";position:fixed;pointer-events:none;border:1px solid rgba(255,255,255,.34);
+      border-radius:999px;opacity:.55;z-index:0
     }
-    h1, h2 {
-      line-height: 1.2;
-      margin: 0;
+    body:before{width:52vw;height:52vw;top:-18vw;right:-10vw;transform:rotate(12deg)}
+    body:after{width:46vw;height:46vw;top:-8vw;right:-3vw;transform:rotate(12deg)}
+    a{text-decoration:none;color:inherit}
+    .shell{
+      position:relative;z-index:1;width:min(1460px,calc(100vw - 40px));margin:34px auto;border-radius:22px;overflow:hidden;
+      background:linear-gradient(180deg,rgba(255,255,255,.64),rgba(255,255,255,.74));border:1px solid rgba(255,255,255,.55);
+      backdrop-filter:blur(18px);box-shadow:var(--shadow)
     }
-    h1 {
-      font-size: 2.4rem;
-      margin-bottom: 18px;
-      color: #241712;
+    .bar{
+      display:flex;align-items:center;gap:18px;padding:14px 22px;background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(255,255,255,.58));
+      border-bottom:1px solid var(--line)
     }
-    h2 {
-      font-size: 1.35rem;
-      margin-top: 34px;
-      margin-bottom: 12px;
-      padding-top: 10px;
-      border-top: 1px solid var(--rule);
-      color: var(--accent);
+    .lights{display:flex;gap:10px}.light{width:13px;height:13px;border-radius:50%}
+    .red{background:#ff5f57}.yellow{background:#febc2e}.green{background:#28c840}
+    .tab{display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:14px 14px 0 0;background:rgba(255,255,255,.92);font-weight:700}
+    .spark{width:18px;height:18px;border-radius:6px;background:radial-gradient(circle at 30% 30%,#cfadff 0,#8f63ff 55%,#6d40ef 100%);transform:rotate(45deg)}
+    .address{
+      flex:1;min-width:0;display:flex;align-items:center;gap:10px;padding:11px 18px;border-radius:14px;background:rgba(255,255,255,.76);
+      border:1px solid var(--line);color:var(--muted)
     }
-    p {
-      margin: 12px 0;
-      font-size: 1.04rem;
+    .address span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .layout{display:grid;grid-template-columns:74px 310px minmax(0,1fr) 290px;min-height:calc(100vh - 160px)}
+    .rail,.nav,.content,.aside{min-width:0}
+    .rail{padding:18px 12px;border-right:1px solid var(--line);background:rgba(255,255,255,.4);display:flex;flex-direction:column;align-items:center;gap:12px}
+    .icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--line);background:rgba(255,255,255,.66);font-weight:700;color:var(--muted)}
+    .icon.brand{color:#fff;background:linear-gradient(180deg,var(--accent-2),var(--accent))}
+    .icon.active{background:rgba(124,77,255,.12);color:#6b43e8}
+    .grow{flex:1}
+    .nav{padding:22px 18px;border-right:1px solid var(--line);background:rgba(255,255,255,.4);overflow:auto}
+    .brand-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .brand-name{font-size:1.05rem;font-weight:800}
+    .search{padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.76);border:1px solid var(--line);color:#8a95a8;margin-bottom:14px}
+    .promo{
+      padding:18px;border-radius:16px;color:#fff;background:linear-gradient(135deg,var(--accent) 0,var(--accent-2) 100%);
+      box-shadow:0 16px 28px rgba(124,77,255,.24);margin-bottom:20px
     }
-    ul, ol {
-      margin: 10px 0 16px 24px;
-      padding: 0;
+    .promo small{display:block;text-transform:uppercase;letter-spacing:.12em;opacity:.75;margin-bottom:7px}
+    .promo strong{display:block;font-size:1.12rem;margin-bottom:8px}
+    .promo p{margin:0;color:rgba(255,255,255,.88);font-size:.95rem}
+    .section-label{margin:22px 0 10px;color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800}
+    .note-list{display:grid;gap:8px}
+    .note{
+      display:flex;gap:12px;padding:12px;border-radius:12px;transition:.16s background,.16s transform
     }
-    li { margin: 6px 0; }
-    code {
-      font-family: Consolas, 'Courier New', monospace;
-      background: #f1e9de;
-      padding: 1px 5px;
-      border-radius: 4px;
-      font-size: 0.94em;
+    .note:hover{background:rgba(124,77,255,.08);transform:translateX(2px)}
+    .note.active{background:rgba(124,77,255,.11)}
+    .dot{width:9px;height:9px;border-radius:50%;margin-top:8px;background:linear-gradient(180deg,#9a6bff 0,#6f41ef 100%)}
+    .note strong{display:block;font-size:.97rem;line-height:1.35}.note span{display:block;color:#8793a7;font-size:.84rem;margin-top:2px}
+    .content{background:rgba(255,255,255,.48);display:flex;flex-direction:column}
+    .topbar{
+      padding:20px 28px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:center;background:rgba(255,255,255,.42)
     }
-    @media print {
-      body { background: white; padding: 0; }
-      main { box-shadow: none; border: none; border-radius: 0; max-width: none; padding: 0; }
+    .crumbs{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:.97rem;white-space:nowrap;overflow:hidden}
+    .crumbs strong{color:var(--ink)} .status{
+      padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.74);border:1px solid var(--line);color:var(--muted);font-size:.92rem
     }
+    .scroll{padding:28px;overflow:auto}
+    .hero,.reader,.card{
+      border:1px solid rgba(112,127,148,.14);border-radius:20px;background:var(--glass-2);box-shadow:0 18px 40px rgba(53,74,112,.08)
+    }
+    .hero{padding:34px;margin-bottom:22px;background:radial-gradient(circle at top right,rgba(169,116,255,.14),transparent 28%),linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.88))}
+    .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(124,77,255,.1);color:#6c43e8;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800;margin-bottom:18px}
+    h1{margin:0 0 10px;font-size:clamp(2.1rem,3vw,3.2rem);line-height:1.05;letter-spacing:-.03em}
+    .sub{margin:0 0 20px;color:var(--muted);font-size:1.14rem;max-width:760px}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:16px}
+    .mini{padding:20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.8)}
+    .mini h2{margin:0 0 10px;font-size:1.22rem}
+    .mini p{margin:0;color:var(--muted)}
+    .mini ul{margin:12px 0 0;padding-left:18px}
+    .reader{padding:30px 34px;margin-bottom:22px}
+    .reader p{margin:0 0 18px;font-size:1.12rem;line-height:1.8;color:#243149}
+    .reader p:last-child{margin-bottom:0}
+    .card{padding:28px 30px;margin-bottom:18px}
+    .card h2{margin:0 0 12px;font-size:1.42rem;line-height:1.15;letter-spacing:-.02em}
+    .card p{margin:0 0 14px;color:#2a364c}
+    .card ul,.card ol{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+    .card li{position:relative;padding-left:20px;color:#2a364c}
+    .card ul li:before{
+      content:"";position:absolute;left:0;top:.72em;width:8px;height:8px;border-radius:50%;background:linear-gradient(180deg,#9a6bff 0,#6f41ef 100%)
+    }
+    .card ol{counter-reset:step}.card ol li{padding-left:44px;min-height:32px;counter-increment:step}
+    .card ol li:before{
+      content:counter(step);position:absolute;left:0;top:-2px;width:30px;height:30px;border-radius:11px;color:#fff;font-size:.88rem;font-weight:800;
+      display:grid;place-items:center;background:linear-gradient(180deg,#9a6bff 0,#6f41ef 100%)
+    }
+    .callout{margin-top:16px;padding:18px 20px;border-radius:14px;background:linear-gradient(180deg,rgba(124,77,255,.08),rgba(124,77,255,.04));border:1px solid rgba(124,77,255,.12)}
+    .callout strong{color:#5d34dc}
+    .twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+    .smallcard{padding:16px;border-radius:14px;background:rgba(255,255,255,.74);border:1px solid var(--line)}
+    .smallcard h3{margin:0 0 8px;font-size:1rem}.smallcard p{margin:0;color:var(--muted);font-size:.95rem}
+    .aside{padding:24px 18px;border-left:1px solid var(--line);background:rgba(255,255,255,.42);overflow:auto}
+    .stack{display:grid;gap:16px;position:sticky;top:18px}
+    .box{padding:18px;border-radius:16px;background:rgba(255,255,255,.8);border:1px solid var(--line);box-shadow:0 16px 30px rgba(56,70,95,.06)}
+    .box h3{margin:0 0 10px;font-size:1rem}.box p{margin:0;color:var(--muted);font-size:.95rem}.box ul{margin:12px 0 0;padding-left:18px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.tag{padding:7px 11px;border-radius:999px;background:rgba(124,77,255,.09);color:#6940e8;font-size:.83rem;font-weight:800}
+    @media (max-width:1320px){.layout{grid-template-columns:74px 300px minmax(0,1fr)}.aside{display:none}}
+    @media (max-width:1024px){.shell{width:min(100vw - 20px,100%);margin:16px auto}.layout{grid-template-columns:74px minmax(0,1fr)}.nav{display:none}.topbar,.scroll{padding-left:20px;padding-right:20px}.hero-grid,.twocol{grid-template-columns:1fr}}
+    @media (max-width:720px){body{padding:10px}.bar{flex-wrap:wrap;gap:12px}.address{flex-basis:100%}.layout{grid-template-columns:1fr}.rail{display:none}.hero,.reader,.card{padding:22px 20px}.topbar{flex-direction:column;align-items:flex-start}}
   </style>
 </head>
 <body>
-  <main>
-<h1>Wolvesbane New Player Guide</h1>
-<p>Version 1</p>
-<p>If your goal on Wolvesbane is to reach the hardest bosses and eventually farm the shard&#39;s real endgame, then do not overcomplicate the decision: start on the pet path.</p>
-<p>You can absolutely play melee, mage, crafter, or something quirky and have fun. But if the question is, &quot;What gives a new player the cleanest road into serious content?&quot; the answer is pets. That is the pattern that keeps showing up in the Discord, especially once the conversation turns from casual farming to balrons, champ pressure, and high-end progression.</p>
-<p>So this guide is written around that reality. It is not a list of every server system. It is a roadmap for how a new player should move if the long-term goal is to become strong enough to handle the shard&#39;s hardest content.</p>
-<h2>Start With The Right Mindset</h2>
-<p>Wolvesbane is not a standard shard where you stumble around for a week and slowly figure things out. It rewards momentum.</p>
-<p>The people who get strong quickly tend to do the same things:</p>
-<ul>
-<li>they choose a focused start</li>
-<li>they use the free beginner support immediately</li>
-<li>they learn loot and tokens early</li>
-<li>they buy utility before vanity</li>
-<li>they move into pet progression and champion content instead of grinding randomly</li>
-</ul>
-<p>That is the whole philosophy of this guide.</p>
-<h2>Getting Into The Shard</h2>
-<p>The connection details most consistently shared in Discord were:</p>
-<ul>
-<li>Website: <code>http://wolvesbaneuo.com</code></li>
-<li>Host: <code>play.wolvesbaneuo.com</code></li>
-<li>Port: <code>2593</code></li>
-<li>Launcher: <code>https://wolvesbaneuo.com/wp55/Downloads/Wolvesbane.exe</code></li>
-</ul>
-<p>Start with the official Wolvesbane launcher first. Get the base install working before you start trying to optimize your client.</p>
-<p>After that, many players seem to move into a setup using ClassicUO, Razor, or Razor Enhanced. If one client feels bad on your system, switch. That seems common enough that it should be treated as normal.</p>
-<p>One setup flow shared by players was:</p>
-<ol>
-<li>Run the Wolvesbane launcher and let it patch.</li>
-<li>Open Razor Enhanced separately from the install folder.</li>
-<li>Let Razor Enhanced update itself.</li>
-<li>Then move into the Razor-with-CUO style setup.</li>
-</ol>
-<h2>Your First Character: Do Not Start Broad</h2>
-<p>The starting packages players mentioned were:</p>
-<ul>
-<li><code>3 skills at 120</code></li>
-<li><code>7 skills at 100</code></li>
-<li><code>all skills at 45</code></li>
-</ul>
-<p>If you want to get powerful as fast as possible, take the focused route, not the broad one.</p>
-<p>My advice for a player who wants to grow into boss farming is simple: build toward pets immediately. Do not spend your strongest starting choices on a temporary weapon build unless you already know exactly why you are doing it.</p>
-<p>There also seems to be a stat-ball system. One example shared in Discord used:</p>
-<ul>
-<li><code>100 STR</code></li>
-<li><code>175 DEX</code></li>
-<li><code>25 INT</code></li>
-</ul>
-<p>That specific spread is not the core point. The core point is that Wolvesbane gives you enough control at the start that random decisions slow you down later.</p>
-<h2>The First Day Roadmap</h2>
-<p>If you are fresh on the shard, this is what you should do first:</p>
-<ol>
-<li>Pick a focused starting package.</li>
-<li>Go straight to the training area.</li>
-<li>Take the training weapons from the tables.</li>
-<li>Grab the newbie armor from the trainer area.</li>
-<li>Set up your loot bag before you start serious farming.</li>
-<li>Train just enough to stop feeling weak.</li>
-<li>Move into the new player water dungeon for early gold and tokens.</li>
-</ol>
-<p>That is the real Wolvesbane early game:</p>
-<ul>
-<li>get stable</li>
-<li>get organized</li>
-<li>start earning tokens</li>
-<li>convert those tokens into momentum</li>
-</ul>
-<p>Do not waste your early hours trying to play elegantly. The shard gives you enough support that you can start progressing fast if you use what is already there.</p>
-<h2>Why Tokens Matter So Much</h2>
-<p>Tokens are one of the core progression currencies on Wolvesbane. If you do not understand them early, you will progress slower than you need to.</p>
-<p>Learn your loot setup early and use <code>[loot</code> properly. You want a system that lets you:</p>
-<ul>
-<li>clear corpses fast</li>
-<li>pull tokens consistently</li>
-<li>avoid filling your backpack with junk</li>
-</ul>
-<p>Players reported that tokens can be exchanged for gold at <code>Lady Luck</code>.</p>
-<p>One commonly repeated benchmark was:</p>
-<ul>
-<li><code>4,000 tokens = 1,000,000 gold</code></li>
-</ul>
-<p>You should treat that as a useful planning number, not a guaranteed current rate. Older update posts show that rates have changed before. The exact number matters less than the principle: tokens are part of your growth engine.</p>
-<p>If you are planning long-term boss progression, you should think of tokens as your first real bridge between &quot;new player&quot; and &quot;real character.&quot;</p>
-<h2>The First Utility Purchases That Actually Help</h2>
-<p>This is one place where a lot of players waste time. They buy flavor items, random gear, or luxuries before they buy the things that actually speed up progression.</p>
-<p>The best early utility tip found in Discord was the custom spellbook stone.</p>
-<p>Players reported that Wolvesbane has a stone selling:</p>
-<ul>
-<li>Rogue spellbook</li>
-<li>Avatar spellbook</li>
-</ul>
-<p>Reported price:</p>
-<ul>
-<li><code>25,000 gold</code></li>
-</ul>
-<p>Why they matter:</p>
-<ul>
-<li>the Rogue book reportedly includes <code>Intimidation</code>, which gives <code>+50</code> to melee weapon skills</li>
-<li>the Avatar book lets you use <code>Mark</code> and <code>Gate</code> through chivalry instead of magery</li>
-</ul>
-<p>That is excellent early value, because it removes friction. It is much easier to build momentum when travel and utility do not feel terrible.</p>
-<p>One warning from players:</p>
-<ul>
-<li>turn <code>Intimidation</code> off while training, because it may interfere with skill gain</li>
-</ul>
-<p>The vote system also matters more than it might seem. Players said the vote stone can give useful items, including a <code>Bag of Holding</code>. If you are starting with little gold, that kind of utility matters.</p>
-<h2>Your First Real Goal: Become A Functional Pet Farmer</h2>
-<p>If your long-term goal is top-end content, your first serious checkpoint is not &quot;finish a perfect build.&quot; It is &quot;become functional enough with pets that you can farm safely and consistently.&quot;</p>
-<p>The Discord conversations point to that very clearly. Once players start talking about real efficiency, hard bosses, and token farming, pets keep coming up.</p>
-<p>The most useful example was balrons.</p>
-<p>From the discussions reviewed:</p>
-<ul>
-<li>players recommended <code>rottweilers</code> against balrons</li>
-<li>balrons were said to drop <code>25k-50k tokens</code> when looted</li>
-<li>players warned that balrons may cast <code>Blood Oath</code></li>
-</ul>
-<p>That tells you exactly how Wolvesbane works at the high end:</p>
-<ul>
-<li>hard content can pay very well</li>
-<li>pets are often the safer and more efficient way to farm it</li>
-<li>brute-forcing bosses in melee because you want to feel heroic is a good way to die for no reason</li>
-</ul>
-<p>If I were planning a new character with endgame in mind, I would measure progress like this:</p>
-<ol>
-<li>Can I survive?</li>
-<li>Can I keep my loot clean?</li>
-<li>Can I make tokens?</li>
-<li>Can I move into pet-based boss farming safely?</li>
-</ol>
-<p>That is a better roadmap than obsessing over a perfect build too early.</p>
-<h2>Champion Progression</h2>
-<p>Champion content matters on Wolvesbane. It is not just a side activity.</p>
-<p>Useful notes pulled from Discord:</p>
-<ul>
-<li><code>Baracoon</code> was recommended because it is less spread out</li>
-<li><code>Ilshenar sleeping dragon</code> was suggested as a place to gain valor</li>
-</ul>
-<p>The biggest thing to understand is reward differences.</p>
-<p>Players said powerscrolls only drop from champion spawns on the <code>Felucca</code> facet. Other champion content may still give:</p>
-<ul>
-<li>valor</li>
-<li>artifacts</li>
-<li>scrolls of transcendence</li>
-<li>gold</li>
-</ul>
-<p>So if your goal is powerscrolls, confirm the facet first. If your goal is general progression, champion content is still worth learning early.</p>
-<p>There was also a newer update saying an instance dungeon had been added that picks a random champion spawn. That matters because it suggests champion progression is still an active design pillar, not an abandoned system.</p>
-<h2>Donations: What Actually Changes Your Progress</h2>
-<p>The donation system matters on Wolvesbane, but it is not as simple as &quot;pay or lose.&quot; The better way to think about it is this:</p>
-<p>donation items shorten friction, but several important power tools also exist through gameplay, tokens, crafting, or boss drops.</p>
-<p>### Donation items that truly accelerate a new player</p>
-<p>These are the ones that look like genuine progression accelerators rather than vanity:</p>
-<ul>
-<li>Bag of Holding</li>
-<li>Tamers Little Helper</li>
-<li>Everlasting Bandages</li>
-<li>Public Gate Book / Travel utility</li>
-<li>Master Keys</li>
-<li>Pet Max Level Deed</li>
-<li>Power Scroll Reward Deed</li>
-<li>Instant Taming Deed</li>
-</ul>
-<p>If a new player knows they are staying on the shard and does not mind supporting it, these are the kinds of items that clearly save time.</p>
-<p>### Donation items that have meaningful in-game alternatives</p>
-<p>This is the part that matters for players who want to grind their way up instead of donating.</p>
-<ul>
-<li><code>Bag of Holding</code>: players said the vote stone can provide one as a reward.</li>
-<li><code>Pet Damage Increase Deed</code>: one donation-info message explicitly says it should be removed from the WD stone because it is on the gold stone.</li>
-<li><code>Spellbook Bag</code>: update posts say it is a tailoring craft item, not purely donation-locked.</li>
-<li><code>Travel Book</code>: FAQ discussion suggests there is at least one publicly available quest-based travel book, even if it does not behave exactly like a runebook.</li>
-<li><code>Power Scrolls</code>: regular progression path exists through champion content on Felucca.</li>
-<li><code>Pet Max Level</code>, <code>Pet AI</code>, <code>Bless</code>, and <code>Self Repair</code> style deeds: an update said Level 4 chests can contain deeds like these.</li>
-<li><code>Timed Training Elemental Deed</code>: an update said it can drop from any kill, with better odds on harder monsters.</li>
-</ul>
-<p>That means the right question is not, &quot;Can this be donated for?&quot; The right question is, &quot;Does donating remove a grind I actually care about?&quot;</p>
-<p>### The veteran advice on donating</p>
-<p>If you donate, donate to remove friction at the exact point where friction is slowing your roadmap.</p>
-<p>Good examples:</p>
-<ul>
-<li>inventory problems</li>
-<li>travel problems</li>
-<li>pet progression bottlenecks</li>
-<li>repetitive healing or utility issues</li>
-</ul>
-<p>Bad examples:</p>
-<ul>
-<li>buying random comfort before you even have a stable farm</li>
-<li>buying fancy things before your loot, movement, and progression loop are working</li>
-</ul>
-<p>If your character still cannot farm reliably, then convenience is less important than fixing the farming loop.</p>
-<h2>The Best Non-Donation Road</h2>
-<p>If you do not want to donate at all, the clean roadmap still exists.</p>
-<p>It looks like this:</p>
-<ol>
-<li>Take the focused start.</li>
-<li>Use the training area and free newbie support.</li>
-<li>Set up loot properly.</li>
-<li>Farm the new player water dungeon.</li>
-<li>Use tokens and vendors to stabilize your character.</li>
-<li>Pick up the custom spellbooks early.</li>
-<li>Push toward pet farming and champion progression.</li>
-<li>Target bosses and systems that drop progression items rather than random decoration.</li>
-</ol>
-<p>The updates and Discord discussions suggest a lot of important power is still available through:</p>
-<ul>
-<li>champs</li>
-<li>boss drops</li>
-<li>higher-end chests</li>
-<li>craft systems</li>
-<li>token vendors</li>
-</ul>
-<p>That is why I would never tell a new player that Wolvesbane is pay-to-win in the lazy sense. It looks more like pay-to-skip-friction.</p>
-<h2>What A Pet-Focused Roadmap Looks Like</h2>
-<p>If the real goal is hardest bosses, then the character roadmap should look something like this:</p>
-<p>### Stage 1: Get stable</p>
-<ul>
-<li>get your client working</li>
-<li>take the focused start</li>
-<li>use the training area</li>
-<li>use newbie armor</li>
-<li>set up loot</li>
-<li>start making tokens</li>
-</ul>
-<p>### Stage 2: Buy utility, not vanity</p>
-<ul>
-<li>fix travel</li>
-<li>fix inventory</li>
-<li>buy the spellbooks that reduce friction</li>
-<li>use vendors to patch weak gear</li>
-</ul>
-<p>### Stage 3: Enter real pet progression</p>
-<ul>
-<li>move toward pets that actually matter in boss content</li>
-<li>learn which encounters are safer with pets than face-tanking</li>
-<li>stop thinking like a generic melee template</li>
-</ul>
-<p>### Stage 4: Farm high-value targets</p>
-<ul>
-<li>champs for progression</li>
-<li>balrons for tokens</li>
-<li>bosses and high-end systems that feed long-term power</li>
-</ul>
-<p>### Stage 5: Upgrade around the pet core</p>
-<ul>
-<li>add convenience only after your core farm works</li>
-<li>decide whether a donation item is solving a real bottleneck</li>
-<li>start targeting max-level, AI, scroll, and other progression systems</li>
-</ul>
-<p>That is the road that makes sense if you want to become genuinely strong instead of just casually geared.</p>
-<h2>Other Useful Shard Notes</h2>
-<p>There are a few other details worth remembering:</p>
-<ul>
-<li>runecrafting reportedly requires <code>120 Magery</code> and <code>120 Inscription</code></li>
-<li>armor is easier and cheaper to runecraft than weapons</li>
-<li>the item should be at full HP or full durability before adding runes</li>
-<li>one player reported destroying a bow while stacking runes</li>
-<li><code>Chaga Mushrooms</code> were discussed as imbuing materials, with reported spawns near the abyssal infernal champion area and from the spider dungeon boss</li>
-</ul>
-<p>The short version is: do not experiment blindly on expensive items.</p>
-<h2>Final Advice</h2>
-<p>If you want to become a strong Wolvesbane player, do not ask, &quot;What is the coolest thing I can do first?&quot;</p>
-<p>Ask this instead:</p>
-<p>&quot;What gets me to a stable pet farming loop with the least wasted time?&quot;</p>
-<p>If you answer that question correctly, the rest of the shard opens up much faster.</p>
-<p>Start focused. Get organized. Learn tokens early. Buy utility before vanity. Move into pets. Let bossing pay for the rest.</p>
-<h2>What Still Needs Confirmation</h2>
-<p>This version is much closer to a real roadmap, but a few details still deserve in-game confirmation:</p>
-<ul>
-<li>the exact current token-to-gold exchange rate</li>
-<li>whether the <code>25k</code> spellbook price is still current</li>
-<li>the best current starter template for the pet path</li>
-<li>which donation items are still on the current vendor at the same prices</li>
-<li>which boss routes are now considered the fastest for a new but organized player</li>
-</ul>
-  </main>
+  <div class="shell">
+    <div class="bar">
+      <div class="lights"><span class="light red"></span><span class="light yellow"></span><span class="light green"></span></div>
+      <div class="tab"><span class="spark"></span><span>Wolvesbane Guide</span></div>
+      <div class="address"><span>🔒</span><span>motivo.github.io/wolvesbane</span></div>
+    </div>
+    <div class="layout">
+      <aside class="rail">
+        <div class="icon brand">✦</div>
+        <div class="icon active">≣</div>
+        <div class="icon">↗</div>
+        <div class="icon">★</div>
+        <div class="icon">?</div>
+        <div class="grow"></div>
+        <div class="icon">⚙</div>
+      </aside>
+      <aside class="nav">
+        <div class="brand-row"><div class="brand-name">Wolvesbane</div><div style="color:#8894a8;font-weight:800">⋯</div></div>
+        <div class="search">⌕ Search sections or topics...</div>
+        <div class="promo"><small>Recommended path</small><strong>Pet Road To Bossing</strong><p>The guide is organized around the safest and fastest route into serious PvE and hard bosses.</p></div>
+        <div class="section-label">Roadmap</div>
+        <div class="note-list">
+          <a class="note active" href="#mindset"><span class="dot"></span><div><strong>Start With The Right Mindset</strong><span>How Wolvesbane actually rewards players</span></div></a>
+          <a class="note" href="#getting-in"><span class="dot"></span><div><strong>Getting Into The Shard</strong><span>Launcher, host, and client setup</span></div></a>
+          <a class="note" href="#first-character"><span class="dot"></span><div><strong>Your First Character</strong><span>Why focused starts beat broad ones</span></div></a>
+          <a class="note" href="#first-day"><span class="dot"></span><div><strong>The First Day Roadmap</strong><span>Training area to early tokens</span></div></a>
+          <a class="note" href="#tokens"><span class="dot"></span><div><strong>Tokens And Utility</strong><span>Loot, gold, and spellbooks</span></div></a>
+          <a class="note" href="#pet-farmer"><span class="dot"></span><div><strong>Become A Pet Farmer</strong><span>Your first real power checkpoint</span></div></a>
+          <a class="note" href="#champions"><span class="dot"></span><div><strong>Champion Progression</strong><span>Valor, powerscrolls, route logic</span></div></a>
+          <a class="note" href="#donations"><span class="dot"></span><div><strong>Donations Vs Grind</strong><span>Acceleration without dependency</span></div></a>
+          <a class="note" href="#pet-roadmap"><span class="dot"></span><div><strong>Pet-Focused Stages</strong><span>Stable to dangerous content</span></div></a>
+          <a class="note" href="#notes"><span class="dot"></span><div><strong>Other Useful Notes</strong><span>Runecrafting and materials</span></div></a>
+        </div>
+      </aside>
+      <main class="content">
+        <div class="topbar">
+          <div class="crumbs"><span>All guides</span><span>›</span><strong>Wolvesbane New Player Guide</strong></div>
+          <div class="status">Public guide layout</div>
+        </div>
+        <div class="scroll">
+          <section class="hero">
+            <div class="eyebrow">Narrative roadmap</div>
+            <h1>Wolvesbane New Player Guide</h1>
+            <p class="sub">This is not a reference sheet. It is the progression road I would hand to a new player whose real goal is to reach hard PvE and boss content without wasting a week learning the wrong lessons.</p>
+            <div class="hero-grid">
+              <div class="mini"><h2>The honest verdict</h2><p>If your destination is the hardest bosses, start on the pet path. Other builds can be fun, but pets are the safest and clearest road into serious farming, champ pressure, and long-term power.</p></div>
+              <div class="mini"><h2>Fast path</h2><ul><li>Start focused</li><li>Use the training area</li><li>Set up loot early</li><li>Push tokens into utility</li><li>Transition into pet farming</li></ul></div>
+            </div>
+          </section>
+          <section class="reader">
+            <p>If your goal on Wolvesbane is to reach the hardest bosses and eventually farm the shard's real endgame, then do not overcomplicate the decision: start on the pet path.</p>
+            <p>You can absolutely play melee, mage, crafter, or something quirky and have fun. But if the real question is what gives a new player the cleanest road into serious content, the answer is pets. That pattern keeps showing up once the conversation turns from casual farming to balrons, champ pressure, and high-end progression.</p>
+            <p>This guide is written around that reality. It is not a list of every system. It is a roadmap for how a new player should move if the long-term goal is to become strong enough to handle the shard's hardest content.</p>
+          </section>
+          <section class="card" id="mindset">
+            <h2>Start With The Right Mindset</h2>
+            <p>Wolvesbane is not a shard where you wander for a week and slowly piece things together. It rewards momentum. The players who get strong quickly tend to do the same things: they take a focused start, use the free beginner support immediately, learn loot and tokens early, buy utility before vanity, and move into pet progression and champion content instead of grinding randomly.</p>
+            <div class="callout"><strong>Keep this in mind:</strong> the guide is built around momentum, not perfection. You do not need a finished character. You need a clean route into stable farming.</div>
+          </section>
+          <section class="card" id="getting-in">
+            <h2>Getting Into The Shard</h2>
+            <p>The connection details most consistently shared in Discord were <code>play.wolvesbaneuo.com</code> on port <code>2593</code>, with the official launcher available at the Wolvesbane website. Start with the launcher and get the base install working before you try to optimize anything.</p>
+            <ol>
+              <li>Run the official launcher and let it patch.</li>
+              <li>Only after that, move into ClassicUO, Razor, or Razor Enhanced if you want a smoother setup.</li>
+              <li>If one client feels bad on your machine, switch. That seems normal enough on this shard to treat as expected.</li>
+            </ol>
+          </section>
+          <section class="card" id="first-character">
+            <h2>Your First Character: Do Not Start Broad</h2>
+            <p>The starting packages players mentioned were <code>3 skills at 120</code>, <code>7 skills at 100</code>, and <code>all skills at 45</code>. If your goal is serious progression, take the focused route, not the broad one.</p>
+            <p>Wolvesbane also appears to use a stat-ball system. One shared example used <code>100 STR</code>, <code>175 DEX</code>, and <code>25 INT</code>. The exact spread is less important than the lesson: do not make random starting choices.</p>
+            <div class="callout"><strong>My advice:</strong> if you want to grow into boss farming, build toward pets immediately. Do not spend your strongest opening tools on a temporary weapon path unless you already know exactly why.</div>
+          </section>
+          <section class="card" id="first-day">
+            <h2>The First Day Roadmap</h2>
+            <ol>
+              <li>Pick a focused starting package.</li>
+              <li>Go straight to the training area.</li>
+              <li>Take the training weapons from the tables.</li>
+              <li>Grab the newbie armor from the trainer area.</li>
+              <li>Set up your loot bag before serious farming.</li>
+              <li>Train just enough to stop feeling weak.</li>
+              <li>Move into the new player water dungeon for early gold and tokens.</li>
+            </ol>
+            <p>That is the real Wolvesbane early game: get stable, get organized, start earning tokens, and turn those tokens into momentum.</p>
+          </section>
+          <section class="card" id="tokens">
+            <h2>Tokens And The First Utility Purchases</h2>
+            <p>Tokens are one of the core progression currencies on Wolvesbane. If you do not understand them early, you will progress slower than you need to. Learn your loot setup early and use <code>[loot</code> properly so you can clear corpses fast, pull tokens consistently, and avoid filling your backpack with junk.</p>
+            <p>Players reported that <code>Lady Luck</code> exchanges tokens for gold, with one commonly repeated benchmark of <code>4,000 tokens = 1,000,000 gold</code>. Treat that as a planning number, not permanent truth.</p>
+            <div class="twocol">
+              <div class="smallcard"><h3>Buy utility, not vanity</h3><p>Use early gains to remove friction first: travel, inventory, spellbook access, and reliable farming speed.</p></div>
+              <div class="smallcard"><h3>Best early shard tip</h3><p>The custom Rogue and Avatar spellbooks look like some of the best early value on the entire shard.</p></div>
+            </div>
+            <p>The custom spellbook stone reportedly sells a Rogue spellbook and an Avatar spellbook for around <code>25,000 gold</code>. The Rogue book includes <code>Intimidation</code>, which reportedly grants <code>+50</code> to melee weapon skills. The Avatar book gives <code>Mark</code> and <code>Gate</code> utility through chivalry instead of magery.</p>
+            <p>One warning came up clearly: turn <code>Intimidation</code> off while training, because it may interfere with skill gain.</p>
+          </section>
+          <section class="card" id="pet-farmer">
+            <h2>Your First Real Goal: Become A Functional Pet Farmer</h2>
+            <p>If your long-term goal is top-end content, your first real checkpoint is not a perfect finished build. It is becoming functional enough with pets that you can farm safely and consistently.</p>
+            <p>The clearest example in the Discord was balrons:</p>
+            <ul>
+              <li><code>rottweilers</code> were repeatedly recommended against balrons</li>
+              <li>balrons were said to drop <code>25k-50k tokens</code> when looted</li>
+              <li>players warned that balrons may cast <code>Blood Oath</code></li>
+            </ul>
+            <p>That tells you exactly how Wolvesbane works at the high end. Hard content can pay very well, pets are often the safer and more efficient way to farm it, and trying to brute-force bosses in melee because you want to feel heroic is a good way to die for no reason.</p>
+            <div class="callout"><strong>Use this checkpoint:</strong> can you survive, keep your loot clean, make tokens, and transition into pet-based boss farming safely? If yes, you are actually progressing.</div>
+          </section>
+          <section class="card" id="champions">
+            <h2>Champion Progression</h2>
+            <p>Champion content matters on Wolvesbane. It is not just a side activity. <code>Baracoon</code> was recommended because it is less spread out, and <code>Ilshenar sleeping dragon</code> was suggested as a place to gain valor.</p>
+            <p>The big thing to understand is reward differences. Players said powerscrolls only drop from champion spawns on the <code>Felucca</code> facet. Other champion content may still give valor, artifacts, scrolls of transcendence, and gold.</p>
+            <p>So if your goal is powerscrolls, confirm the facet first. If your goal is general progression, champion content is still worth learning early.</p>
+          </section>
+          <section class="card" id="donations">
+            <h2>Donations Vs Grind</h2>
+            <p>The donation system matters on Wolvesbane, but it does not read like simple pay-or-lose design. A better way to think about it is this: donation items shorten friction, but several important power tools also exist through gameplay, tokens, crafting, or boss drops.</p>
+            <div class="twocol">
+              <div class="smallcard"><h3>Donation accelerators</h3><p>Bag of Holding, Tamers Little Helper, Everlasting Bandages, travel utility, Master Keys, Pet Max Level, Power Scroll Reward, and Instant Taming all look like real time-savers.</p></div>
+              <div class="smallcard"><h3>Meaningful alternatives</h3><p>Vote rewards, gold-stone items, tailoring crafts, quest travel books, champ powerscrolls, higher-end chests, and drop-based training deeds all show up as non-donation routes.</p></div>
+            </div>
+            <p>If you donate, donate to remove friction at the exact point where friction is slowing your roadmap. Inventory, travel, pet progression bottlenecks, and repetitive healing are good reasons. Buying comfort before your farming loop works is not.</p>
+            <p>The non-donation road still looks viable: take the focused start, use the training area and free support, set up loot properly, farm the water dungeon, stabilize with tokens and vendors, pick up utility, then push toward pet farming and champion progression.</p>
+          </section>
+          <section class="card" id="pet-roadmap">
+            <h2>What A Pet-Focused Roadmap Looks Like</h2>
+            <ol>
+              <li>Get stable. Make the client work, take the focused start, use the training area, use newbie armor, and start making tokens.</li>
+              <li>Buy utility, not vanity. Fix travel, fix inventory, buy the spellbooks that remove friction, and patch weak gear with vendors.</li>
+              <li>Enter real pet progression. Move toward pets that actually matter in boss content and stop thinking like a generic melee template.</li>
+              <li>Farm high-value targets. Push champs for progression, balrons for tokens, and bosses that feed long-term power.</li>
+              <li>Upgrade around the pet core. Add convenience only after the core farm works and only when it solves a real bottleneck.</li>
+            </ol>
+            <p>That is the road that makes sense if you want to become genuinely strong instead of merely casually geared.</p>
+          </section>
+          <section class="card" id="notes">
+            <h2>Other Useful Shard Notes</h2>
+            <ul>
+              <li>runecrafting reportedly requires <code>120 Magery</code> and <code>120 Inscription</code></li>
+              <li>armor is easier and cheaper to runecraft than weapons</li>
+              <li>the item should be at full HP or full durability before adding runes</li>
+              <li>one player reported destroying a bow while stacking runes</li>
+              <li><code>Chaga Mushrooms</code> were discussed as imbuing materials, with reported spawns near the abyssal infernal champion area and from the spider dungeon boss</li>
+            </ul>
+            <p>The short version is simple: do not experiment blindly on expensive items.</p>
+          </section>
+        </div>
+      </main>
+      <aside class="aside">
+        <div class="stack">
+          <section class="box">
+            <h3>Core truth</h3>
+            <p>If you want the hardest bosses, build the roadmap around pets from the beginning. Everything else should support that.</p>
+            <div class="tags"><span class="tag">Pets first</span><span class="tag">Tokens matter</span><span class="tag">Utility wins</span></div>
+          </section>
+          <section class="box">
+            <h3>Best early buys</h3>
+            <ul><li>Loot setup that actually works</li><li>Travel and utility spellbooks</li><li>Cheap gear that accelerates farming</li></ul>
+          </section>
+          <section class="box">
+            <h3>Donate only if it removes friction</h3>
+            <p>Good donation logic is simple: solve inventory, travel, healing, or pet bottlenecks. Do not spend before your core farm is stable.</p>
+          </section>
+          <section class="box">
+            <h3>Still worth verifying</h3>
+            <ul><li>current token-to-gold rate</li><li>spellbook prices now</li><li>best pet starter template today</li><li>current boss route for fastest growth</li></ul>
+          </section>
+        </div>
+      </aside>
+    </div>
+  </div>
 </body>
 </html>
